@@ -4,7 +4,9 @@ const axios = require("axios");
 
 //ROUTE 1:
 router.get("/comics", async (req, res) => {
-  let { apiKey, limit, skip, title } = req.query;
+  let { limit, skip, title } = req.query;
+
+  const apiKey = process.env.YOUR_API_KEY;
 
   if (!limit) {
     limit = "";
@@ -18,7 +20,7 @@ router.get("/comics", async (req, res) => {
 
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${process.env.YOUR_API_KEY}&limit=${limit}&skip=${skip}&title=${title}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apiKey}&limit=${limit}&skip=${skip}&title=${title}`
     );
     // console.log(response); //renvoie la réponse globlale avec tableau d'objets pour la clé results
     // console.log(response.data.count); //renvoie le nombre de Comics
@@ -42,10 +44,12 @@ router.get("/comics/:characterId", async (req, res) => {
   console.log(req.params); //renvoie { characterId: '5fc8ba1fdc33470f788f88b3' }
   console.log(charId); //renvoie '5fc8ba1fdc33470f788f88b3'
 
+  const apiKey = process.env.YOUR_API_KEY;
+
   if (charId) {
     try {
       const response = await axios.get(
-        `https://lereacteur-marvel-api.herokuapp.com/comics/${charId}?apiKey=${process.env.YOUR_API_KEY}`
+        `https://lereacteur-marvel-api.herokuapp.com/comics/${charId}?apiKey=${apiKey}`
       );
 
       // console.log(response); //renvoie la réponse globlale avec tableau d'objets pour la clé results

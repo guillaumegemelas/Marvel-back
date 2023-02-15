@@ -3,7 +3,9 @@ const router = express.Router();
 const axios = require("axios");
 
 router.get("/characters", async (req, res) => {
-  let { apiKey, limit, skip, title } = req.query;
+  let { limit, skip, title } = req.query;
+
+  const apiKey = process.env.YOUR_API_KEY;
 
   if (!limit) {
     limit = "";
@@ -17,7 +19,7 @@ router.get("/characters", async (req, res) => {
 
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.YOUR_API_KEY}&limit=${limit}&skip=${skip}&title=${title}`
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${apiKey}&limit=${limit}&skip=${skip}&title=${title}`
     );
     console.log(response);
     //réponse du serveur avec le tableau d'objet global (count, limit et results)
@@ -38,10 +40,12 @@ router.get("/character/:characterId", async (req, res) => {
   console.log(req.params); //
   console.log(thencharId); //
 
+  const apiKey = process.env.YOUR_API_KEY;
+
   if (thencharId) {
     try {
       const response = await axios.get(
-        `https://lereacteur-marvel-api.herokuapp.com/character/${thencharId}?apiKey=${process.env.YOUR_API_KEY}`
+        `https://lereacteur-marvel-api.herokuapp.com/character/${thencharId}?apiKey=${apiKey}`
       );
       console.log(req.params);
       console.log(response);
