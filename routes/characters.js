@@ -37,17 +37,20 @@ router.get("/character/:characterId", async (req, res) => {
   const thencharId = req.params.characterId;
   console.log(req.params); //
   console.log(thencharId); //
-  try {
-    const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/character/${thencharId}?apiKey=${process.env.YOUR_API_KEY}`
-    );
-    console.log(req.params);
-    console.log(response);
 
-    ////réponse du serveur avec un objet {thumbnail, comics, id, name, description et V}
-    res.status(200).json(response.data);
-  } catch (error) {
-    res.status(400).json(error.message);
+  if (thencharId) {
+    try {
+      const response = await axios.get(
+        `https://lereacteur-marvel-api.herokuapp.com/character/${thencharId}?apiKey=${process.env.YOUR_API_KEY}`
+      );
+      console.log(req.params);
+      console.log(response);
+
+      ////réponse du serveur avec un objet {thumbnail, comics, id, name, description et V}
+      res.status(200).json(response.data);
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
   }
 });
 
