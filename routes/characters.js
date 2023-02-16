@@ -34,6 +34,7 @@ router.get("/characters", async (req, res) => {
 //
 //
 // ROUTE 4: /character/:characterId------------------------------------------------------------------------------------------------------------------------------------------------------
+//à voir l'utilité dans le projet?
 
 router.get("/character/:characterId", async (req, res) => {
   const thencharId = req.params.characterId;

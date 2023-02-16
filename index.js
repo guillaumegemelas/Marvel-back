@@ -1,12 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 require("dotenv").config();
 const axios = require("axios");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+//connection à la DB
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.MONGODB_URI);
 
 //route simple en Get pour vérifier réponse de l'API
 app.get("/", async (req, res) => {
@@ -29,6 +33,10 @@ app.use(comicsRoutes);
 //ROUTE characters:
 const charactersRoutes = require("./routes/characters");
 app.use(charactersRoutes);
+
+//ROUTE sigUp:
+const signupRoutes = require("./routes/users");
+app.use(signupRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ message: "This routes doesn't exist" });
