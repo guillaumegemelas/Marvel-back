@@ -34,7 +34,7 @@ app.use(comicsRoutes);
 const charactersRoutes = require("./routes/characters");
 app.use(charactersRoutes);
 
-//ROUTE sigUp:
+//ROUTE sigUp et login:
 const signupRoutes = require("./routes/users");
 app.use(signupRoutes);
 

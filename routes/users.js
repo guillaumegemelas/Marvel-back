@@ -36,4 +36,24 @@ router.post("/user/signup", async (req, res) => {
   }
 });
 
+router.post("/user/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(401).json({ message: "Unauthorized email" });
+    }
+
+    // const userPass = await User.findOne({ password: password });
+    // if (!userPass) {
+    //   return res.status(401).json({ message: "Unauthorized password" });
+    // }
+
+    res.json({ _id: user._id });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = router;
