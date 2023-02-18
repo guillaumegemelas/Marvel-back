@@ -9,10 +9,12 @@ router.get("/comics", async (req, res) => {
   const apiKey = process.env.YOUR_API_KEY;
 
   if (!limit) {
-    limit = "";
+    limit = 2;
+    //changement limit:"" en limit: nombre par page
   }
-  if (!skip) {
-    skip = "";
+  if (skip) {
+    skip = skip * limit;
+    //changement skip:"" en skip: numéro  page
   }
   if (!title) {
     title = "";
@@ -22,7 +24,7 @@ router.get("/comics", async (req, res) => {
     const response = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apiKey}&limit=${limit}&skip=${skip}&title=${title}`
     );
-    // console.log(response); //renvoie la réponse globlale avec tableau d'objets pour la clé results
+    console.log(response.data); //renvoie la réponse globlale avec tableau d'objets pour la clé results
     // console.log(response.data.count); //renvoie le nombre de Comics
     // console.log(response.data.limit); //renvoie la limite par page
     // console.log(response.data.results); //renvoie un tableau de résultats
@@ -31,6 +33,7 @@ router.get("/comics", async (req, res) => {
     //réponse du serveur avec le tableau d'objet results
     // res.status(200).json(response.data.results);
     ////réponse du serveur avec le tableau d'objet  global (count, limit et results)
+
     res.status(200).json(response.data);
     //
   } catch (error) {
