@@ -8,10 +8,10 @@ router.get("/characters", async (req, res) => {
   const apiKey = process.env.YOUR_API_KEY;
 
   if (!limit) {
-    limit = "";
+    limit = 20;
   }
-  if (!skip) {
-    skip = "";
+  if (skip) {
+    skip = skip * limit;
   }
   if (!name) {
     name = "";

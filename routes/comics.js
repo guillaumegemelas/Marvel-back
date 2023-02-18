@@ -9,7 +9,7 @@ router.get("/comics", async (req, res) => {
   const apiKey = process.env.YOUR_API_KEY;
 
   if (!limit) {
-    limit = 2;
+    limit = 20;
     //changement limit:"" en limit: nombre par page
   }
   if (skip) {
