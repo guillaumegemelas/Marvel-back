@@ -11,7 +11,7 @@ router.get("/characters", async (req, res) => {
     limit = 20;
   }
   if (skip) {
-    skip = skip * limit;
+    skip = (skip - 1) * limit;
   }
   if (!name) {
     name = "";

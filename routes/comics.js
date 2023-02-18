@@ -13,7 +13,7 @@ router.get("/comics", async (req, res) => {
     //changement limit:"" en limit: nombre par page
   }
   if (skip) {
-    skip = skip * limit;
+    skip = (skip - 1) * limit;
     //changement skip:"" en skip: numéro  page
   }
   if (!title) {
