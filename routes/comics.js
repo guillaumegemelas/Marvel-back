@@ -14,6 +14,7 @@ router.get("/comics", async (req, res) => {
   }
   if (skip) {
     skip = (skip - 1) * limit;
+
     //changement skip:"" en skip: numéro  page
   }
   if (!title) {
