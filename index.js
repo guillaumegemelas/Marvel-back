@@ -38,6 +38,10 @@ app.use(charactersRoutes);
 const signupRoutes = require("./routes/users");
 app.use(signupRoutes);
 
+//ROUTE favourites
+const favouriteRoutes = require("./routes/favourites");
+app.use(favouriteRoutes);
+
 app.all("*", (req, res) => {
   res.status(404).json({ message: "This routes doesn't exist" });
 });
